@@ -5,107 +5,230 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("test");
-
-        // Array list para os usuários, projetos e atividades
+        // arraylists
         ArrayList<Usuario> arrayDeUsuarios = new ArrayList<Usuario>();
         ArrayList<Projeto> arrayDeProjetos = new ArrayList<Projeto>();
         ArrayList<Atividade> arrayDeAtividades = new ArrayList<Atividade>();
-
-        System.out.println("====== Sistema ======");
-        System.out.println("Escolha uma das opções:\n   (1) Adicionar Usuário\n   (2) Adicionar um Projeto\n   (3) Adicionar Atividade\n  ------------\n   (4) Remover um Usuário\n   (5) Remover um Projeto\n   (6) Remover uma Atividade\n   (7) Encerrar Sistema");
-
-         // pegando a escolha do usuário
         Scanner input = new Scanner(System.in);
-        int escolha = input.nextInt();
-        input.nextLine();
-         
-        if (escolha == 1) {
- 
-             // Adicionando um usuário
-             System.out.println("Nome do usuário: ");
-             String nomeUsuario = input.nextLine();
-             System.out.println("Tipo de usuário (Aluno, Professor, Pesquisador, Profissional ou Técnico): ");
-             String tipoDeUsuario = input.nextLine();
-             System.out.println("Id do projeto que está participando: ");
-             int projetoUsuario = input.nextInt();
-             System.out.println("Id da atividade que está participando dentro desse projeto: ");
-             int atividadeUsuario = input.nextInt();
-             
-             // Colocando esse novo usuário dentro do array list de usuários
-             arrayDeUsuarios.add(new Usuario(nomeUsuario, tipoDeUsuario, projetoUsuario, atividadeUsuario));
-             System.out.println("usuario Criado");
- 
-         } else if (escolha == 2) {
- 
-             // Adicionando um Projeto
-             System.out.println("Id do projeto que está sendo criado: ");
-             int idProjeto = input.nextInt();
-             input.nextLine();
-             System.out.println("Descrição do Projeto: ");
-             String descricao = input.nextLine();
-             System.out.println("Data e hora de inicio: ");
-             String dataInicio = input.nextLine();
-             System.out.println("Data e hora de término: ");
-             String dataTermino = input.nextLine();
-             System.out.println("Coordenador do projeto: ");
-             String coordenador = input.nextLine();
 
-             // Colocando esse novo projeto dentro do array list de projetos
-             arrayDeProjetos.add(new Projeto(idProjeto, descricao, dataInicio, dataTermino, coordenador));
-             System.out.println("Projeto Criado");
-             
-        } else if (escolha == 3) {
-            
-            // Adicionando uma atividade
-            System.out.print("Id do projeto que será adicionada uma atividade: ");
-            int idProjetoEditado = input.nextInt();
-            System.out.print("Id da atividade que está sendo criada: ");
-            int idAtividade = input.nextInt();
-            System.out.print("Descrição da Atividade: ");
-            String descricaoAtividade = input.nextLine();
-            System.out.print("Data e hora de inicio: ");
-            String dataInicioAtividade = input.nextLine();
-            System.out.print("Data e hora de término: ");
-            String dataTerminoAtividade = input.nextLine();
-            System.out.print("Responsável pela Atividade: ");
-            String responsavel = input.nextLine();
+        while (true) {
+            System.out.println("======= Sistema de Gerenciamento =======");
+            System.out.println(
+                    "   (1) Adicionar um Usuário\n   (2) Adicionar um Projeto\n   (3) Adicionar uma Atividade\n   (4) Editar um Usuáro\n   (5) Editar um Projeto\n   (6) Editar uma Atividade\n   (7) Procurar por um Usuário, Atividade ou Projeto\n   (8) Sair");
 
-            // Colocando essa nova atividade dentro do array list de atividades
-            arrayDeAtividades.add(new Atividade(idProjetoEditado, idAtividade, descricaoAtividade, dataInicioAtividade, dataTerminoAtividade, responsavel));
-            System.out.println("Atividade criada");
+            // pegando o input do usuário
+            int escolha = input.nextInt();
 
-        } else if (escolha == 4) {
+            if (escolha == 1) {
+                System.out.println("Digite o id do novo usuário que está sendo criado");
+                int idUsuario = input.nextInt();
+                arrayDeUsuarios.add(new Usuario(idUsuario));
+                System.out.println("Usuário criado");
 
-            // Removendo um usuário
-            System.out.println("id do usuário a ser removido: ");
-            int idUsuarioRemovido = input.nextInt();
-            arrayDeUsuarios.remove(idUsuarioRemovido);
-            System.out.println("Usuario Removido");
+                for (int i = 0; i < arrayDeUsuarios.size(); i++) {
+                    System.out.println(arrayDeUsuarios.get(i).idUsuario);
+                }
 
-        } else if (escolha == 5) {
+            } else if (escolha == 2) {
+                System.out.println(
+                        "Digite o id, descrição, data de início, data de término, e o coordenador, respectivamente");
+                int idProjeto = input.nextInt();
+                input.nextLine();
+                String descricaoProjeto = input.nextLine();
+                String dataInicio = input.nextLine();
+                String dataTermino = input.nextLine();
+                String coordenador = input.nextLine();
+                arrayDeProjetos.add(new Projeto(idProjeto, descricaoProjeto, dataInicio, dataTermino, coordenador));
 
-            // Excluindo um projeto
-            System.out.println("id do projeto a ser removido: ");
-            int idProjetoRemovido = input.nextInt();
-            arrayDeProjetos.remove(idProjetoRemovido);
-            System.out.println("Projeto Removido");
+            } else if (escolha == 3) {
+                System.out.println(
+                        "Digite o id, descrição, data de início, data de término e o responsável, respectivamente");
+                int idAtividade = input.nextInt();
+                input.nextLine();
+                String descricaoAtividade = input.nextLine();
+                String dataInicio = input.nextLine();
+                String dataTermino = input.nextLine();
+                String responsavel = input.nextLine();
+                arrayDeAtividades
+                        .add(new Atividade(idAtividade, descricaoAtividade, dataInicio, dataTermino, responsavel));
 
-        } else if (escolha == 6) { 
+            } else if (escolha == 4) {
+                System.out.println(("Qual o id do usuário à ser modificado?"));
+                int idUsuarioModificado = input.nextInt();
+                int indiceUsuarioModificado;
 
-            // Excluindo uma atividade
-            System.out.println("id da atividade a ser removida: ");
-            int idAtividadeRemovida = input.nextInt();
-            arrayDeAtividades.remove(idAtividadeRemovida);
-            System.out.println("Atividade Removida");
+                // encontrando o indice do usuário em questão
+                for (int i = 0; i < arrayDeUsuarios.size(); i++) {
+                    if (idUsuarioModificado == arrayDeUsuarios.get(i).idUsuario) {
+                        indiceUsuarioModificado = i;
 
-        } else if (escolha == 7) {
+                        System.out.println("   (1) Mudar o id do Usuário\n   (2) Excluir Usuário");
+                        int escolhaModificar = input.nextInt();
 
-            // Saindo do sistema
-            System.out.println("Sistema encerrado");
-            System.exit(0);
+                        if (escolhaModificar == 1) {
+                            System.out.println("Qual será o novo id do usuário?");
+                            int novoIdUsuario = input.nextInt();
+                            arrayDeUsuarios.get(indiceUsuarioModificado).idUsuario = novoIdUsuario;
+                            System.out.println("Id modificado com sucesso");
+
+                        } else if (escolhaModificar == 2) {
+                            arrayDeUsuarios.remove(indiceUsuarioModificado);
+                            System.out.println("Usuário excluído com sucesso");
+
+                        }
+                        i = arrayDeUsuarios.size();
+                    } else if (idUsuarioModificado != arrayDeUsuarios.get(i).idUsuario
+                            && i == arrayDeUsuarios.size() - 1) {
+                        System.out.println("Esse usuário não existe");
+                    }
+                }
+
+            } else if (escolha == 5) {
+                System.out.println(("Qual o id do projeto à ser modificado?"));
+                int idProjetoModificado = input.nextInt();
+                int indiceProjetoModificado;
+
+                for (int i = 0; i < arrayDeProjetos.size(); i++) {
+                    if (idProjetoModificado == arrayDeProjetos.get(i).idProjeto) {
+                        indiceProjetoModificado = i;
+
+                        System.out.println(
+                                "   (1) Modificar id\n   (2) Modificar descrição\n   (3) Modificar data de início\n   (4) Modificar data de término\n   (5) Modificar coordenador");
+                        int escolhaModificar = input.nextInt();
+
+                        if (escolhaModificar == 1) {
+                            System.out.println("Qual será o novo id do projeto?");
+                            int novoIdProjeto = input.nextInt();
+                            arrayDeProjetos.get(indiceProjetoModificado).idProjeto = novoIdProjeto;
+                            System.out.println("Id modificado com sucesso");
+
+                        } else if (escolhaModificar == 2) {
+                            System.out.println("Digite a nova descrição");
+                            String novaDescricao = input.nextLine();
+                            arrayDeProjetos.get(indiceProjetoModificado).descricao = novaDescricao;
+                            System.out.println("Descrição modificada com sucesso");
+
+                        } else if (escolhaModificar == 3) {
+                            System.out.println("Digite a nova data de início");
+                            String novaDataInicio = input.nextLine();
+                            arrayDeProjetos.get(indiceProjetoModificado).dataInicio = novaDataInicio;
+                            System.out.println("Data de início modificada com sucesso");
+
+                        } else if (escolhaModificar == 4) {
+                            System.out.println("Digite a nova data de término");
+                            String novaDataTermino = input.nextLine();
+                            arrayDeProjetos.get(indiceProjetoModificado).dataTermino = novaDataTermino;
+
+                        } else if (escolhaModificar == 5) {
+                            System.out.println("Digite o nome do novo coordenador");
+                            String novoCoordenador = input.nextLine();
+                            arrayDeProjetos.get(indiceProjetoModificado).coordenador = novoCoordenador;
+                        }
+                    } else if (idProjetoModificado != arrayDeProjetos.get(i).idProjeto
+                            && i == arrayDeProjetos.size() - 1) {
+                        System.out.println("Projeto não encontrado");
+                    }
+                }
+
+            } else if (escolha == 6) {
+                System.out.println("Qual o id da atividade à ser modificada?");
+                int idAtividadeModificada = input.nextInt();
+                int indiceAtividadeModificada;
+
+                for (int i = 0; i < arrayDeAtividades.size(); i++) {
+                    if (idAtividadeModificada == arrayDeAtividades.get(i).idAtividade) {
+                        indiceAtividadeModificada = i;
+
+                        System.out.println(
+                                "   (1) Modificar o id\n   (2) Modificar a descrição\n   (3) Modificar a data de início\n   (4) Modificar a data de término\n   (5) Modificar o responsável");
+                        int escolhaModificarAtividade = input.nextInt();
+
+                        if (escolhaModificarAtividade == 1) {
+                            System.out.println("Digite o novo id");
+                            int novoIdAtividade = input.nextInt();
+                            arrayDeAtividades.get(indiceAtividadeModificada).idAtividade = novoIdAtividade;
+                            System.out.println("Id modificado com sucesso");
+
+                        } else if (escolhaModificarAtividade == 2) {
+                            System.out.println("Digite a nova descrição");
+                            String novaDescricao = input.nextLine();
+                            arrayDeAtividades.get(indiceAtividadeModificada).descricao = novaDescricao;
+                            System.out.println("Descrição modificada com sucesso");
+
+                        } else if (escolhaModificarAtividade == 3) {
+                            System.out.println("Digite a nova data de início");
+                            String novaDataInicio = input.nextLine();
+                            arrayDeAtividades.get(indiceAtividadeModificada).dataInicio = novaDataInicio;
+                            System.out.println("Data de início modificada com sucesso");
+
+                        } else if (escolhaModificarAtividade == 4) {
+                            System.out.println("Digite a nova data de término");
+                            String novaDataTermino = input.nextLine();
+                            arrayDeAtividades.get(indiceAtividadeModificada).dataTermino = novaDataTermino;
+                            System.out.println("Data de término modificada com sucesso");
+                        } else if (escolhaModificarAtividade == 5) {
+                            System.out.println("Digite o novo responsável");
+                            String novoResponsavel = input.nextLine();
+                            arrayDeAtividades.get(indiceAtividadeModificada).responsavel = novoResponsavel;
+                            System.out.println("Responsável modificado com sucesso");
+                        }
+                    } else if (idAtividadeModificada != arrayDeAtividades.get(i).idAtividade
+                            && i == arrayDeAtividades.size() - 1) {
+                        System.out.println("Atividade não encontrada");
+                    }
+                }
+
+            } else if (escolha == 7) {
+                System.out.println("   (1) Procurar Usuário\n   (2) Procurar Projeto\n   (3) Procurar Atividade");
+                int escolhaProcurar = input.nextInt();
+
+                if (escolhaProcurar == 1) {
+                    System.out.println("Qual o id do usuário?");
+                    int idUsuarioProcurar = input.nextInt();
+                    for (int i = 0; i < arrayDeUsuarios.size(); i++) {
+                        if (idUsuarioProcurar == arrayDeUsuarios.get(i).idUsuario) {
+                            System.out.println("Usuário encontrado:");
+                            System.out.println(arrayDeUsuarios.get(i));
+                            i = arrayDeUsuarios.size();
+                        } else if (idUsuarioProcurar != arrayDeUsuarios.get(i).idUsuario
+                                && i == arrayDeUsuarios.size() - 1) {
+                            System.out.println("Usuário não encontrado");
+                        }
+                    }
+
+                } else if (escolhaProcurar == 2) {
+                    System.out.println("Qual o id do projeto?");
+                    int idProjetoProcurar = input.nextInt();
+                    for (int i = 0; i < arrayDeProjetos.size(); i++) {
+                        if (idProjetoProcurar == arrayDeProjetos.get(i).idProjeto) {
+                            System.out.println("Projeto encontrado:");
+                            System.out.println(arrayDeProjetos.get(i));
+                            i = arrayDeProjetos.size();
+                        } else if (idProjetoProcurar != arrayDeProjetos.get(i).idProjeto
+                                && i == arrayDeProjetos.size() - 1) {
+                            System.out.println("Projeto não encontrado");
+                        }
+                    }
+
+                } else if (escolhaProcurar == 3) {
+                    System.out.println("Qual o id da atividade?");
+                    int idAtividadeProcurar = input.nextInt();
+                    for (int i = 0; i < arrayDeAtividades.size(); i++) {
+                        if (idAtividadeProcurar == arrayDeAtividades.get(i).idAtividade) {
+                            System.out.println("Atividade encontrada:");
+                            System.out.println(arrayDeAtividades.get(i));
+                            i = arrayDeAtividades.size();
+                        } else if (idAtividadeProcurar != arrayDeAtividades.get(i).idAtividade
+                                && i == arrayDeAtividades.size() - 1) {
+                            System.out.println("Atividade não encontrada");
+                        }
+                    }
+                }
+
+            } else if (escolha == 8) {
+                input.close();
+                System.exit(0);
+            }
         }
-
-        input.close();
-    }  
+    }
 }
