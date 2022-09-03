@@ -14,7 +14,7 @@ public class Main {
         while (true) {
             System.out.println("======= Sistema de Gerenciamento =======");
             System.out.println(
-                    "   (1) Adicionar um Usuário\n   (2) Adicionar um Projeto\n   (3) Adicionar uma Atividade\n   (4) Editar um Usuáro\n   (5) Editar um Projeto\n   (6) Editar uma Atividade\n   (7) Procurar por um Usuário, Atividade ou Projeto\n   (8) Sair");
+                    "   (1) Adicionar um Usuário\n   (2) Adicionar um Projeto\n   (3) Adicionar uma Atividade\n   (4) Editar um Usuáro\n   (5) Editar um Projeto\n   (6) Editar uma Atividade\n   (7) Procurar por um Usuário, Atividade ou Projeto\n   (8) Relatório dos Projetos e Atividades da Instituição\n   (9) Sair");
 
             // pegando o input do usuário
             int escolha = input.nextInt();
@@ -226,6 +226,26 @@ public class Main {
                 }
 
             } else if (escolha == 8) {
+
+                if (arrayDeProjetos.isEmpty()) {
+                    System.out.println("Não há nenhum projeto em andamento");
+                } else {
+                    System.out.println("Número de projetos em andamento: " + arrayDeProjetos.size());
+                    for (int i = 0; i < arrayDeProjetos.size(); i++) {
+                        System.out.println(arrayDeProjetos.get(i).idProjeto + " ");
+                    }
+                }
+
+                if (arrayDeAtividades.isEmpty()) {
+                    System.out.println("Não há nenhuma atividade em andamento");
+                } else {
+                    System.out.println("Número de atividades em andamento: " + arrayDeAtividades.size());
+                    for (int i = 0; i < arrayDeAtividades.size(); i++) {
+                        System.out.println(arrayDeAtividades.get(i).idAtividade + " ");
+                    }
+                }
+
+            } else if (escolha == 9) {
                 input.close();
                 System.exit(0);
             }
