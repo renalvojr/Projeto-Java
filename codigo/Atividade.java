@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Atividade {
     // atributos
     int idAtividade;
@@ -5,8 +7,7 @@ public class Atividade {
     String dataInicio;
     String dataTermino;
     String responsavel;
-    // Profissionais envolvidos;
-    // Tarefas a serem realizadas por cada profissional
+    public ArrayList<Integer> idProfissionais = new ArrayList<Integer>();
 
     Atividade(int idAtividade, String descricao, String dataInicio, String dataTermino, String responsavel) {
         this.idAtividade = idAtividade;
@@ -15,4 +16,5 @@ public class Atividade {
         this.dataTermino = dataTermino;
         this.responsavel = responsavel;
     }
+
 }

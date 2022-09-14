@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Projeto {
     // atributos
     int idProjeto;
@@ -5,10 +7,9 @@ public class Projeto {
     String dataInicio;
     String dataTermino;
     String coordenador;
-    // array list de profissionais envolvidos no projeto
-    // array list de atividades dentro desse projeto
-    // valor da bolsa para cada profissional
-    // periodo de vigência da bolsa
+    int id_envolvidos[] = new int[50];
+    public ArrayList<Integer> idProfissionais = new ArrayList<Integer>();
+    String status = "Em processo de criação";
 
     // objeto
     Projeto(int idProjeto, String descricao, String dataInicio, String dataTermino, String coordenador) {
