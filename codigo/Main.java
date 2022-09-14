@@ -36,7 +36,6 @@ public class Main {
 
                         //////////////////////////////////////////////////////////// PROGRAMA
                         //////////////////////////////////////////////////////////// /////////////////////////////////
-                        //////////////////////////////////////////////////////////// //////////////////////////////////////////////
                         while (u == 1) {
                             System.out.println("======= Sistema de Gerenciamento =======");
                             System.out.println("Seu ID: " + arrayDeUsuarios.get(i).idUsuario + "  Seu tipo: "
@@ -46,14 +45,43 @@ public class Main {
                             if (arrayDeUsuarios.get(i).tipo == 1 || arrayDeUsuarios.get(i).tipo == 2
                                     || arrayDeUsuarios.get(i).tipo == 3 || arrayDeUsuarios.get(i).tipo == 6) {
 
-                                // entrar em um projeto ou atividade
 
-                                System.out.println("(1) Deslogar");
+                                System.out.println("   (1) Entrar em algum projeto ou atividade\n   (2) Deslogar");
                                 // pegando o input do usuário
                                 int escolha = input.nextInt();
 
-                                // Deslogar
                                 if (escolha == 1) {
+                                    System.out.println("   (1) Entrar em um projeto\n   (2) Entrar em uma atividade");
+                                    int ttt = input.nextInt();
+
+                                    if (ttt == 1) {
+                                        System.out.println("Digite o ID do projeto que deseja entrar");
+                                        int tut = input.nextInt();
+
+                                        for (int yi = 0; yi < arrayDeProjetos.size(); yi++) {
+                                            if (arrayDeProjetos.get(yi).idProjeto == tut) {
+                                                arrayDeProjetos.get(yi).idProfissionais.add(arrayDeUsuarios.get(i).idUsuario);
+                                                yi = arrayDeProjetos.size();
+                                                System.out.println("Você entrou no projeto");
+                                            }
+                                        }
+                                    }
+                                    else if (ttt == 2) {
+                                        System.out.println("Digite o ID da atividade que deseja entrar");
+                                        int tut = input.nextInt();
+
+                                        for (int yi = 0; yi < arrayDeAtividades.size(); yi++) {
+                                            if (arrayDeAtividades.get(yi).idAtividade == tut) {
+                                                arrayDeAtividades.get(yi).idProfissionais.add(arrayDeUsuarios.get(i).idUsuario);
+                                                yi = arrayDeAtividades.size();
+                                                System.out.println("Você entrou na atividade");
+                                            }
+                                        }
+                                    }
+                                }
+
+                                // Deslogar
+                                else if (escolha == 2) {
                                     u = 2;
                                 }
                             }
@@ -61,7 +89,7 @@ public class Main {
                             // se for profissional ou pesquisador
                             else if (arrayDeUsuarios.get(i).tipo == 4 || arrayDeUsuarios.get(i).tipo == 5) {
                                 System.out.println(
-                                        "   (1) Adicionar um Usuário\n   (2) Adicionar um Projeto\n   (3) Adicionar uma Atividade\n   (4) Editar um Usuáro\n   (5) Editar um Projeto\n   (6) Editar uma Atividade\n   (7) Procurar por um Usuário, Atividade ou Projeto\n   (8) Relatório dos Projetos e Atividades da Instituição\n   (9) Adicionar, Excluir ou Mover usuários de um projeto ou atividade\n   (10) Deslogar");
+                                        "   (1) Adicionar um Usuário\n   (2) Adicionar um Projeto\n   (3) Adicionar uma Atividade\n   (4) Editar um Usuáro\n   (5) Editar um Projeto\n   (6) Editar uma Atividade\n   (7) Procurar por um Usuário, Atividade ou Projeto\n   (8) Relatório dos Projetos e Atividades da Instituição\n   (9) Adicionar, Excluir ou Mover usuários de um projeto ou atividade\n   (10) Fazer intercambio de usuários\n   (11) Gerenciar pagamento de bolsas\n   (12) Deslogar");
 
                                 // pegando o input do usuário
                                 int escolha = input.nextInt();
@@ -434,8 +462,81 @@ public class Main {
                                         }
                                     }
                                 }
-                                // Deslogar
+                                // Intercambio de usuários
                                 else if (escolha == 10) {
+                                    System.out.println("Qual o id do usuário?");
+                                    int idUser = input.nextInt();
+                                    System.out.println("Qual o id da atividade que deseja fazer o intercambio?");
+                                    int idProj = input.nextInt();
+
+                                    for (int pp = 0; pp < arrayDeAtividades.size(); pp++) {
+                                        if (arrayDeAtividades.get(pp).idAtividade == idProj) {
+                                            arrayDeAtividades.get(pp).idProfissionais.add(idUser);
+                                            System.out.println(arrayDeAtividades.get(pp).idProfissionais);
+                                            pp = arrayDeAtividades.size();
+                                            System.out.println("Intercambio realizado");
+                                        }
+                                    }
+                                }
+                                //Gerenciar o pagamento de bolsa
+                                else if (escolha == 11) {
+                                    System.out.println("ID do Usuário que você deseja gerenciar a bolsa");
+                                    int idUs = input.nextInt();
+
+                                    for (int us = 0; us < arrayDeUsuarios.size(); us++) {
+                                        if (arrayDeUsuarios.get(us).idUsuario == idUs) {
+                                            if (arrayDeUsuarios.get(us).bolsa == 0) {
+                                                System.out.println("Esse usuário ainda não possui nenhuma bolsa");
+
+                                                System.out.println("   (1) Adicionar uma bolsa ao usuário");
+                                                int escolhav = input.nextInt();
+
+                                                if (escolhav == 1) {
+                                                    System.out.println("Digite o valor da bolsa, e em seguida sua vigencia");
+                                                    int valor_bolsa = input.nextInt();
+                                                    input.nextLine();
+                                                    String vigencia_bolsa = input.nextLine();
+
+                                                    arrayDeUsuarios.get(us).bolsa = valor_bolsa;
+                                                    arrayDeUsuarios.get(us).vigencia = vigencia_bolsa;
+                                                    System.out.println("Bolsa adicionada com sucesso");
+                                                }
+                                            }
+                                            else {
+                                                System.out.println("Valor da bolsa: " + arrayDeUsuarios.get(us).bolsa + "  Vigencia: " + arrayDeUsuarios.get(us).vigencia);
+
+                                                System.out.println("   (1) Editar valor ou vigencia da bolsa\n   (2) Sair");
+                                                int escolhav = input.nextInt();
+
+                                                if (escolhav == 1) {
+                                                    System.out.println("   (1) Modificar valor da bolsa\n   (2) Modificar vigencia da bolsa");
+                                                    int escolhavv = input.nextInt();
+
+                                                    if (escolhavv == 1) {
+                                                        System.out.println("Digite o novo valor da bolsa");
+                                                        int valor_bolsa2 = input.nextInt();
+                                                        arrayDeUsuarios.get(us).bolsa = valor_bolsa2;
+                                                        System.out.println("Valor da bolsa modificado com sucesso");
+                                                    }
+                                                    else if (escolhavv == 2) {
+                                                        System.out.println("Digite o nova data de vigencia");
+                                                        input.nextLine();
+                                                        String vigencia_bolsa2 = input.nextLine();
+                                                        arrayDeUsuarios.get(us).vigencia = vigencia_bolsa2;
+                                                        System.out.println("Data de vigencia modificada com sucesso");
+                                                    }
+                                                }
+                                                else if (escolhav == 2) {
+                                                    System.out.println("Gerenciamento de bolsas encerrado");
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                }
+
+                                // Deslogar
+                                else if (escolha == 12) {
                                     u = 2;
                                 }
                             }

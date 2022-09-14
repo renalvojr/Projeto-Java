@@ -4,6 +4,8 @@ public class Usuario {
     int senha;
     int tipo;
     int coordenador;
+    int bolsa = 0;
+    String vigencia;
     // 1 - graduação, 2 - mestrado, 3 - doutorado, 4 - pesquisador, 5 -
     // profissional, 6 - tecnico
 
